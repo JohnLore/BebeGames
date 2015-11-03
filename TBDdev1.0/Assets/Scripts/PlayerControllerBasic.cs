@@ -24,8 +24,8 @@ public class PlayerControllerBasic : MonoBehaviour {
 
 		CharacterController controller = GetComponent<CharacterController>();
 		if (controller.isGrounded) {
-			moveForward *= Input.GetAxis("Vertical");
-			moveSide *= - Input.GetAxis("Horizontal");
+			moveForward *= Input.GetAxisRaw("Vertical");
+			moveSide *= - Input.GetAxisRaw("Horizontal");
 			/*
 			moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 			moveDirection = transform.TransformDirection(moveDirection);
@@ -40,13 +40,14 @@ public class PlayerControllerBasic : MonoBehaviour {
 			Vector3 scaleForward = speedF * Vector3.Project (moveDirection, moveForward);
 			moveDirection = scaleSide + scaleForward;
 
-
+			moveUp = 0.0f;
 			if (Input.GetButton("Jump"))
 				moveUp = jumpSpeed;
 
 		}
 
 		moveUp -= gravity * Time.deltaTime;
+
 		moveDirection.y = moveUp;
 		controller.Move(moveDirection * Time.deltaTime);
 	}
