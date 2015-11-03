@@ -26,7 +26,13 @@ public class PlayerCamera : MonoBehaviour {
 		//Treat a vertical movement as a rotation in the plane
 		//parallel to y, containing the cameras position.
 		float moveHorizontal = Input.GetAxis ("HorizontalR");
-		float moveVertical = Input.GetAxis ("VerticalR");
+
+		//inverted/uninverted y-axis control set by Menu -- default inverted
+		float moveVertical;
+		if (GlobalVars.invertYAxis) //invertYAxis is global
+			moveVertical = 1.0f * Input.GetAxis ("VerticalR");
+		else
+			moveVertical =  -1.0f * Input.GetAxis ("VerticalR");
 
 		float Theta = moveVertical * ySensitivity;
 		float Phi = moveHorizontal* xSensitivity;
@@ -48,6 +54,7 @@ public class PlayerCamera : MonoBehaviour {
 		float a = direction.x;
 		float b = direction.y;
 		float c = direction.z;
+
 
 		//Construct basis uyvw from xyzw
 
@@ -97,6 +104,13 @@ public class PlayerCamera : MonoBehaviour {
 		rotate = toBasis * rotateY * rotateV * frBasis;
 
 		direction = rotate * direction;
+
+		//don't let player look below ground
+		if (direction.y < 0.0f)
+			direction.y = 0.0f;
+
+		//TODO: fix -- when player holds down arrow (trying to look through ground)
+		//             camera creeps towards player. Prevent camera from zooming in here.
 
 
 		//Zoom/fade
