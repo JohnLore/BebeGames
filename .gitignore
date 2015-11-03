@@ -1,10 +1,10 @@
 # Unity specific #
 ##################
-TBDdev1.0/Library/
-TBDdev1.0/Temp/
-TBDdev1.0/ProjectSettings/
-TBDdev1.0/TBDdev1.0userprefs
-TBDdev1.0/TBDdev1.0.sln
+*/Library/
+*/Temp/
+*/ProjectSettings/
+*/*.userprefs
+*/*.sln
 
 # Compiled source #
 ###################
