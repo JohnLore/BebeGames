@@ -109,9 +109,13 @@ public class PlayerCamera : MonoBehaviour {
 		if (direction.y < 0.0f)
 			direction.y = 0.0f;
 
+
 		//TODO: fix -- when player holds down arrow (trying to look through ground)
 		//             camera creeps towards player. Prevent camera from zooming in here.
 
+		//TODO: fix -- when reset game from menu, the light gets weird
+
+		//TODO: fix -- when player looks straight up (holds down up) its spazzes
 
 		//Zoom/fade
 		float deltaZoom = Input.GetAxis ("Mouse ScrollWheel");
