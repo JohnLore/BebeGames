@@ -25,11 +25,7 @@ public class PlayerCamera : MonoBehaviour {
 		//Treat a horizontal movement as a rotation about y
 		//Treat a vertical movement as a rotation in the plane
 		//parallel to y, containing the cameras position.
-		float moveHorizontal;
-		if (GlobalVars.invertXAxis) //invertXAxis is global
-			moveHorizontal = -1.0f * Input.GetAxis ("HorizontalR");
-		else
-			moveHorizontal =  1.0f * Input.GetAxis ("HorizontalR");
+		float moveHorizontal = Input.GetAxis ("HorizontalR");
 
 		//inverted/uninverted y-axis control set by Menu -- default inverted
 		float moveVertical;
@@ -39,7 +35,7 @@ public class PlayerCamera : MonoBehaviour {
 			moveVertical =  -1.0f * Input.GetAxis ("VerticalR");
 
 		float Theta = moveVertical * ySensitivity;
-		float Phi = moveHorizontal * xSensitivity;
+		float Phi = moveHorizontal* xSensitivity;
 		//Calculate trigs
 		float sinTheta = Mathf.Sin (Theta);
 		float cosTheta = Mathf.Cos (Theta);
