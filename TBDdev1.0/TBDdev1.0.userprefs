@@ -1,9 +1,10 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PlayerMovement.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\CameraScripts\WindWakerRay.cs">
     <Files>
-      <File FileName="Assets/Scripts/PlayerCamera.cs" Line="131" Column="1" />
-      <File FileName="Assets/Scripts/PlayerMovement.cs" Line="10" Column="3" />
+      <File FileName="Assets\Scripts\CameraScripts\WindWakerFree.cs" Line="168" Column="4" />
+      <File FileName="Assets\Scripts\CameraScripts\WindWakerRay.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\CameraScripts\WindWakerFreeDeprecated.cs" Line="36" Column="66" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
