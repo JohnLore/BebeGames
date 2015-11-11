@@ -3,14 +3,22 @@ using System.Collections;
 
 public class Menu : MonoBehaviour 
 {
+	//setup gui stuff
 	public GUISkin guiSkin;
 	public Texture2D background;
 	public bool DragWindow = false;
 
+	//setup menu stuff
 	private bool onMenu;
 	private string clicked;
-	private Rect WindowRect = new Rect((Screen.width / 2) - 150, Screen.height / 2, 200, 200);
-	private float volume = 1.0f;
+	private Rect WindowRect = new Rect((Screen.width / 2) - 150, Screen.height / 2, 200, 225);
+
+	//server/multiplayer stuff
+	private string serverName = "DefaultServer";
+	private int connectionPort = 8000;
+	private string connectionIP = "0.0.0.0";
+	private string playerName = "DefaultPlayer";
+
 	
 	private void Start()
 	{
@@ -50,6 +58,18 @@ public class Menu : MonoBehaviour
 				Time.timeScale = 1;
 				onMenu = false;
 			}
+			else if (clicked == "multiplayer") 
+			{
+				WindowRect = GUI.Window (1, WindowRect, multiplayerFunc, "Multiplayer");
+			}
+			else if (clicked == "connectServer") 
+			{
+				WindowRect = GUI.Window (1, WindowRect, connectToServerFunc, "Connect to Server");
+			} 
+			else if (clicked == "setupServer") 
+			{
+				WindowRect = GUI.Window (1, WindowRect, setupServerFunc, "Setup Server");
+			} 
 			else if (clicked == "options") 
 			{
 				WindowRect = GUI.Window (1, WindowRect, optionsFunc, "Options");
@@ -75,7 +95,61 @@ public class Menu : MonoBehaviour
 	}
 
 
+	private void multiplayerFunc(int id)
+	{
+		if (GUILayout.Button("Connect to Server"))
+		{
+			clicked = "connectServer";
+		}
+		if (GUILayout.Button("Setup Server"))
+		{
+			clicked = "setupServer";
+		}
+		if (GUILayout.Button("Back"))
+		{
+			clicked = "";
+		}
+	}
 
+	public void setupServerFunc(int id)
+	{
+		GUILayout.Label ("Enter Server Name:");
+		serverName = GUILayout.TextField (serverName);
+		GUILayout.Label ("Server Connection Port:");
+		connectionPort = int.Parse (GUILayout.TextField (connectionPort.ToString()));
+
+		if (GUILayout.Button("Start Server"))
+		{
+			//maybe prelim validate fields entered
+			//start server
+		}
+
+		if (GUILayout.Button("Back"))
+		{
+			clicked = "multiplayer";
+		}
+	}
+
+	public void connectToServerFunc(int id)
+	{
+		GUILayout.Label ("Enter Player Name:");
+		playerName = GUILayout.TextField (playerName);
+		GUILayout.Label ("Server Connection IP:");
+		connectionIP = GUILayout.TextField (connectionIP);
+		GUILayout.Label ("Server Connection Port:");
+		connectionPort = int.Parse (GUILayout.TextField (connectionPort.ToString ()));
+
+		if (GUILayout.Button("Connect to Server"))
+		{
+			//maybe prelim validate fields entered
+			//connect to server
+		}
+
+		if (GUILayout.Button("Back"))
+		{
+			clicked = "multiplayer";
+		}
+	}
 
 	private void optionsFunc(int id)
 	{
@@ -104,6 +178,10 @@ public class Menu : MonoBehaviour
 		if (GUILayout.Button("Reset"))
 		{
 			clicked = "reset";
+		}
+		if (GUILayout.Button("Multiplayer"))
+		{
+			clicked = "multiplayer";
 		}
 		if (GUILayout.Button("Options"))
 		{

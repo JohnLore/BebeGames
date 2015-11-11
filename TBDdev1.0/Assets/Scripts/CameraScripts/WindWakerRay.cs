@@ -125,10 +125,10 @@ public class WindWakerRay : MonoBehaviour {
 
 		if (GlobalVars.invertYAxis)
 			turn *= -1.0f;
-		/*
+
 		if (GlobalVars.invertXAxis)
 			lift *= -1.0f;
-		*/
+	
 
 	}
 
