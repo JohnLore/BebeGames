@@ -2,7 +2,7 @@
 using System.Collections;
 
 //A camera script which assumes no rotations or scaling of the player it is attatched to
-public class PlayerCamera : MonoBehaviour {
+public class SphereNoClip : MonoBehaviour {
 	
 	public GameObject player;
 	public float xSensitivity;
@@ -25,11 +25,7 @@ public class PlayerCamera : MonoBehaviour {
 		//Treat a horizontal movement as a rotation about y
 		//Treat a vertical movement as a rotation in the plane
 		//parallel to y, containing the cameras position.
-		float moveHorizontal;
-		if (GlobalVars.invertXAxis) //invertXAxis is global
-			moveHorizontal = -1.0f * Input.GetAxis ("HorizontalR");
-		else
-			moveHorizontal =  1.0f * Input.GetAxis ("HorizontalR");
+		float moveHorizontal = Input.GetAxis ("HorizontalR");
 
 		//inverted/uninverted y-axis control set by Menu -- default inverted
 		float moveVertical;
@@ -39,7 +35,7 @@ public class PlayerCamera : MonoBehaviour {
 			moveVertical =  -1.0f * Input.GetAxis ("VerticalR");
 
 		float Theta = moveVertical * ySensitivity;
-		float Phi = moveHorizontal * xSensitivity;
+		float Phi = moveHorizontal* xSensitivity;
 		//Calculate trigs
 		float sinTheta = Mathf.Sin (Theta);
 		float cosTheta = Mathf.Cos (Theta);
@@ -56,7 +52,6 @@ public class PlayerCamera : MonoBehaviour {
 
 		//First get the components x=a,y=b,z=c from the direction vector3
 		float a = direction.x;
-		float b = direction.y;
 		float c = direction.z;
 
 
@@ -70,8 +65,6 @@ public class PlayerCamera : MonoBehaviour {
 		Vector4 v = Vector3.Normalize (new Vector4 (c, 0.0f, -a, 0.0f));
 
 		Vector4 w = new Vector4 (0.0f, 0.0f, 0.0f, 1.0f);
-
-		Vector4 zer0 = Vector4.zero;
 
 		float aPrime = Vector3.Dot (u, Vector3.right);
 		float cPrime = Vector3.Dot (u, Vector3.forward);
@@ -109,13 +102,7 @@ public class PlayerCamera : MonoBehaviour {
 
 		direction = rotate * direction;
 
-		//don't let player look below ground
-		if (direction.y < 0.0f)
-			direction.y = 0.0f;
 
-
-		//TODO: fix -- when player holds down arrow (trying to look through ground)
-		//             camera creeps towards player. Prevent camera from zooming in here.
 
 		//TODO: fix -- when reset game from menu, the light gets weird
 
