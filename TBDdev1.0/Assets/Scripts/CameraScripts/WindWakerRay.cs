@@ -5,9 +5,6 @@ using System.Collections;
 
 public class WindWakerRay : MonoBehaviour {
 	public GameObject target;
-	
-
-	private Collider targetCollider;
 
 	public static float turnSensitivity = 0.08f;
 	public static float liftSensitivity = 0.3f;
@@ -19,12 +16,10 @@ public class WindWakerRay : MonoBehaviour {
 	private float presumedRadius;
 	private Vector2 wallDirection;
 
-	private float turnDiminish = 10.0f;
 	private float turn;
 	private float lift;
 
 	private static float a = 9.0f;
-	private static float deltaHeight = maxHeight - minHeight;
 	private static float deltaView = (maxViewDistance-minViewDistance);
 	private static float b = (maxHeight-minHeight)/(Mathf.Sqrt(1+(deltaView*deltaView)/(a*a))-1);
 
@@ -47,7 +42,6 @@ public class WindWakerRay : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		targetCollider = GetComponentInParent<Collider> ();
 		presumedRadius = Mathf.Sqrt (transform.position.x*transform.position.x+transform.position.z*transform.position.z);
 	}
 
