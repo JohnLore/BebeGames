@@ -31,7 +31,8 @@ public class TossRandom : NetworkBehaviour {
 			{
 				index = 0;
 			}
-			throwItem.AddComponent<Item_SyncPosition>();
+			//add this when its ready to work on the network
+			//throwItem.AddComponent<Item_SyncPosition>();
 			throwItem.AddComponent<Rigidbody>();
 			throwItem.AddComponent<SphereCollider>();
 			throwItem.transform.localScale = new Vector3(5, 5, 5);
