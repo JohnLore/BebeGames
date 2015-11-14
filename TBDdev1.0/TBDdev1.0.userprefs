@@ -1,11 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PlayerCamera.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Network/Player_SyncPosition.cs">
     <Files>
-      <File FileName="Assets/Scripts/PlayerCamera.cs" Line="131" Column="1" />
-      <File FileName="Assets/Scripts/PlayerControllerBasic.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/PlayerMovementHandler.cs" Line="4" Column="35" />
-      <File FileName="Assets/Scripts/CameraScripts/WindWakerRay.cs" Line="132" Column="3" />
+      <File FileName="Assets/Scripts/Network/Player_NetworkSetup.cs" Line="16" Column="27" />
+      <File FileName="Assets/Scripts/Network/Player_SyncPosition.cs" Line="37" Column="25" />
+      <File FileName="Assets/Scripts/TossRandom.cs" Line="2" Column="30" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
