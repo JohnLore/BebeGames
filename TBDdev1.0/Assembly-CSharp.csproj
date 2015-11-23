@@ -45,6 +45,8 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\AirRide\BoxSpawnerHandler.cs" />
+     <Compile Include="Assets\Scripts\AirRide\CarController.cs" />
      <Compile Include="Assets\Scripts\CameraScripts\SphereNoClip.cs" />
      <Compile Include="Assets\Scripts\CameraScripts\WindWakerRay.cs" />
      <Compile Include="Assets\Scripts\GlobalVars.cs" />
