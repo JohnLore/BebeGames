@@ -4,25 +4,33 @@ using System.Collections;
 
 class BoxSpawnerHandler : NetworkBehaviour
 {
-	private uint numSpawned;
+	//private uint numSpawned;
 	private bool isSpawning;
 
 	public GameObject boxPrefab;
-
-	public uint secondsBetweenSpawn;
+	public uint secondsBetweenSpawn = 5;
+	public uint boxesPerSpawnCycle = 10;
+	public uint maxBoxes = 100;
 
 	public void Start()
 	{
-		numSpawned = 0;
 		isSpawning = false;
 	}
 
 	public void Update()
 	{
+		//numSpawned = (uint) (NetworkServer.objects.Count);
 		if (!isSpawning) 
 		{
 			isSpawning = true;
-			StartCoroutine(Spawn());
+			for (int i = 0; i < boxesPerSpawnCycle; i++)
+			{
+				if ((maxBoxes - GlobalVars.numBoxesSpawned) > 0)
+				{
+					StartCoroutine(Spawn());
+					GlobalVars.numBoxesSpawned++;
+				}
+			}
 		}
 	}
 			

@@ -51,6 +51,7 @@
      <Compile Include="Assets\Scripts\CameraScripts\SphereNoClip.cs" />
      <Compile Include="Assets\Scripts\CameraScripts\WindWakerRay.cs" />
      <Compile Include="Assets\Scripts\GlobalVars.cs" />
+     <Compile Include="Assets\Scripts\GlobalVarsView.cs" />
      <Compile Include="Assets\Scripts\Menu.cs" />
      <Compile Include="Assets\Scripts\Network\Item_SyncPosition.cs" />
      <Compile Include="Assets\Scripts\Network\Player_NetworkSetup.cs" />

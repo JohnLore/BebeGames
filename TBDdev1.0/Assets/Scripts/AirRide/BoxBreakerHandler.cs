@@ -4,7 +4,7 @@ using System.Collections;
 
 public class BoxBreakerHandler : NetworkBehaviour {
 	// Use this for initialization
-	private MeshRenderer mr;
+	//private MeshRenderer mr;
 	void Start () {
 		//mr = gameObject.GetComponent<MeshRenderer> ();
 	}
@@ -26,6 +26,9 @@ public class BoxBreakerHandler : NetworkBehaviour {
 	{
 		NetworkServer.UnSpawn (thing);
 		NetworkServer.Destroy(thing);
+		if (GlobalVars.numBoxesSpawned > 0)
+			GlobalVars.numBoxesSpawned--;
+
 		print ("hey look its working");
 	}
 
