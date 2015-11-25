@@ -8,6 +8,9 @@ public class PlayerMovementHandler : MonoBehaviour {
   public float gravity = 20.0F;
   public float movementTolerance = 0.01F;
   
+  private bool jumpEnabled = true; //prevents continuous jumping by holding spacebar
+  public bool continuousJumping = false; //option to allow continuous jumping always 
+  
   private Vector3 moveDirection = Vector3.zero;
   private float moveUp = 0;
   
@@ -42,10 +45,14 @@ public class PlayerMovementHandler : MonoBehaviour {
     //jumping
     if (controller.isGrounded) {
       moveUp = 0.0f;
-      if (Input.GetButton ("Jump"))
-        moveUp = jumpSpeed;
+	  if ((continuousJumping && Input.GetButton ("Jump")) || Input.GetButtonDown ("Jump"))
+	    moveUp = jumpSpeed;
     }
-    
+	/*
+	if (!jumpEnabled && Input.GetButtonUp ("Jump"))
+	    jumpEnabled = true;
+	    */
+
     moveUp -= gravity * Time.deltaTime;
     
     moveDirection.y = moveUp;

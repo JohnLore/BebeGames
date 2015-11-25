@@ -3,20 +3,17 @@ using UnityEngine.Networking;
 using System.Collections;
 
 public class BoxBreakerHandler : NetworkBehaviour {
-	// Use this for initialization
-	//private MeshRenderer mr;
-	void Start () {
-		//mr = gameObject.GetComponent<MeshRenderer> ();
+	void Start()
+	{
 	}
-	
-	// Update is called once per frame
-	void Update () {
 
+	void Update()
+	{
 	}
 
 	void OnCollisionEnter(Collision colObj) {
-		if (colObj.gameObject.tag == "BreakableBox") {
-			//mr.enabled = false;
+		if (colObj.gameObject.tag == "BreakableBox") 
+		{
 			CmdPleaseDestroyThisThing(colObj.gameObject);
 		}
 	}
@@ -26,11 +23,5 @@ public class BoxBreakerHandler : NetworkBehaviour {
 	{
 		NetworkServer.UnSpawn (thing);
 		NetworkServer.Destroy(thing);
-		if (GlobalVars.numBoxesSpawned > 0)
-			GlobalVars.numBoxesSpawned--;
-
-		print ("hey look its working");
 	}
-
 }
-

@@ -14,19 +14,6 @@ class BoxSpawnerHandler : NetworkBehaviour
 	public override void OnStartServer()
 	{
 		count = 0;
-		/*
-		boxSpawns = new GameObject[80*80];
-		for (int i = 0; i < 80; i++) 
-		{
-			for (int j = 0; j < 80; j++) 
-			{
-				int index = i*80 + j;
-				boxSpawns[index] = new GameObject("SpawnPoint" + index);
-				boxSpawns[index].transform.position = new Vector3(i-40,10f,j-40);
-			}
-		}
-		*/
-		//boxSpawns = GameObject.FindGameObjectsWithTag ("BoxSpawn");
 		StartCoroutine (BoxSpawner ());
 	}
 
@@ -47,20 +34,18 @@ class BoxSpawnerHandler : NetworkBehaviour
 	{
 		for (int i = 0; i < numBoxesPerCycle; i++)
 		{
-			/*
-			int randIdx = Random.Range(0, boxSpawns.Length);
-			SpawnBox(boxSpawns[randIdx].transform.position);
-			*/
 			Vector3 spawnPos = new Vector3(Random.Range (-40, 40), 10f, Random.Range (-40, 40));
-			SpawnBox(spawnPos);
+			Vector3 spawnRot = new Vector3(0f, Random.Range (0, 90), 0f);
+			SpawnBox(spawnPos, spawnRot);
 		}
 	}
 
-	void SpawnBox(Vector3 spawnPos)
+	void SpawnBox(Vector3 spawnPos, Vector3 spawnRot)
 	{
 		count++;
 		GameObject go = GameObject.Instantiate (breakableBoxPrefab, spawnPos, Quaternion.identity) as GameObject;
 		NetworkServer.Spawn (go);
+		go.transform.Rotate (spawnRot);
 		//go.GetComponent<Box_ID> ().boxID = "Box" + count;
 	}
 
