@@ -4,56 +4,64 @@ using System.Collections;
 
 class BoxSpawnerHandler : NetworkBehaviour
 {
-	//private uint numSpawned;
-	private bool isSpawning;
+	[SerializeField] private GameObject[] boxSpawns;
+	private uint count;
+	[SerializeField] GameObject breakableBoxPrefab;
+	public uint numBoxesPerCycle;
+	public uint maxNumBoxes;
+	public float spawnCycleSeconds;
 
-	public GameObject boxPrefab;
-	public uint secondsBetweenSpawn = 5;
-	public uint boxesPerSpawnCycle = 10;
-	public uint maxBoxes = 100;
-
-	public void Start()
+	public override void OnStartServer()
 	{
-		isSpawning = false;
+		count = 0;
+		/*
+		boxSpawns = new GameObject[80*80];
+		for (int i = 0; i < 80; i++) 
+		{
+			for (int j = 0; j < 80; j++) 
+			{
+				int index = i*80 + j;
+				boxSpawns[index] = new GameObject("SpawnPoint" + index);
+				boxSpawns[index].transform.position = new Vector3(i-40,10f,j-40);
+			}
+		}
+		*/
+		//boxSpawns = GameObject.FindGameObjectsWithTag ("BoxSpawn");
+		StartCoroutine (BoxSpawner ());
 	}
 
-	public void Update()
+	IEnumerator BoxSpawner()
 	{
-		//numSpawned = (uint) (NetworkServer.objects.Count);
-		if (!isSpawning) 
+		for (;;) 
 		{
-			isSpawning = true;
-			for (int i = 0; i < boxesPerSpawnCycle; i++)
+			yield return new WaitForSeconds(spawnCycleSeconds);
+			GameObject[] spawnedBoxes = GameObject.FindGameObjectsWithTag("BreakableBox");
+			if (spawnedBoxes.Length < maxNumBoxes)
 			{
-				if ((maxBoxes - GlobalVars.numBoxesSpawned) > 0)
-				{
-					StartCoroutine(Spawn());
-					GlobalVars.numBoxesSpawned++;
-				}
+				CommenceBoxSpawn();
 			}
 		}
 	}
-			
-			
-	IEnumerator Spawn()
-	{
-		Vector3 spawnPos = GetSpawnPoint ();
-		Quaternion spawnRot = new Quaternion (0f, Random.Range (0, 90), 0f, 0f);
 
-		yield return new WaitForSeconds(secondsBetweenSpawn);
-		GameObject box = (GameObject)Instantiate(boxPrefab, spawnPos, spawnRot);
-		//tree.GetComponent<Tree>().numLeaves = Random.Range(10,200);
-		NetworkServer.Spawn (box);
-		isSpawning = false;
-	}
-	
-	
-	public Vector3 GetSpawnPoint()
+	void CommenceBoxSpawn()
 	{
-		float yPos = 10f;
-		float xPos = Random.Range (-50, 50);
-		float zPos = Random.Range (-50, 50);
-	
-		return new Vector3 (xPos, yPos, zPos);
+		for (int i = 0; i < numBoxesPerCycle; i++)
+		{
+			/*
+			int randIdx = Random.Range(0, boxSpawns.Length);
+			SpawnBox(boxSpawns[randIdx].transform.position);
+			*/
+			Vector3 spawnPos = new Vector3(Random.Range (-40, 40), 10f, Random.Range (-40, 40));
+			SpawnBox(spawnPos);
+		}
 	}
+
+	void SpawnBox(Vector3 spawnPos)
+	{
+		count++;
+		GameObject go = GameObject.Instantiate (breakableBoxPrefab, spawnPos, Quaternion.identity) as GameObject;
+		NetworkServer.Spawn (go);
+		//go.GetComponent<Box_ID> ().boxID = "Box" + count;
+	}
+
 }
